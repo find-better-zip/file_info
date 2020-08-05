@@ -26,10 +26,8 @@ def get_entropy(freqList):
     return ent
 
 class all:
-    def __init__(self, file_name):
-        f = open(file_name, "rb")
-        self.byteArr = get_byteArr(f)
-        f.close()
+    def __init__(self, file_obj):
+        self.byteArr = get_byteArr(file_obj)
         self.fileSize = get_fileSize(self.byteArr)
         self.freqList = get_freqList(self.byteArr, self.fileSize)
         self.entropy = get_entropy(self.freqList)
