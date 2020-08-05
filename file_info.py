@@ -2,7 +2,10 @@
 import math
 
 def get_byteArr(file_obj):
-    return map(ord,file_obj.read())
+    return list(file_obj.read())
+
+def get_fileSize(byteArr):
+    return len(byteArr)
 
 def get_freqList(byteArr, fileSize):
     freqList = []
@@ -22,11 +25,11 @@ def get_entropy(freqList):
     ent = -ent
     return ent
 
-class info:
+class all:
     def __init__(self, file_name):
         f = open(file_name, "rb")
         self.byteArr = get_byteArr(f)
         f.close()
-        self.fileSize = len(self.byteArr)
+        self.fileSize = get_fileSize(self.byteArr)
         self.freqList = get_freqList(self.byteArr, self.fileSize)
         self.entropy = get_entropy(self.freqList)
