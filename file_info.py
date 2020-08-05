@@ -22,7 +22,7 @@ def get_entropy(freqList):
     ent = -ent
     return ent
 
-class all:
+class info:
     def __init__(self, file_name):
         f = open(file_name, "rb")
         self.byteArr = get_byteArr(f)
