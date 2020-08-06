@@ -24,6 +24,24 @@ def get_entropy(freqList):
             ent += freq * math.log(freq, 0.5) * freq# freqList 리스트에서 -log_1/2(freq) 수행 후 ent 값을 더해줌
     return ent
 
+def get_highest_freq(freqList):
+    rep = 0 # 반복용
+    recode_char = 0 #저장 1 초기화
+    recode_numberSize = 0.0 # 저장 2 초기화
+    recodeList = [0]
+    for freq in freqList: 
+        if recode_numberSize == freq and chr(rep) != ' ' and chr(rep) != '\n': # 겹치는거 있으면
+            recodeList.append(chr(rep)) # 겹치는거 추가함
+        if recode_numberSize < freq and chr(rep) != ' ' and chr(rep) != '\n': # 더 크면
+            recode_char = rep # 설정 변경
+            recode_numberSize = freq 
+            recodeList = [chr(rep)] # 배열 초기화
+        rep += 1
+    if len(recodeList) > 1: # 배열이 하나 이상이면
+        return recodeList # recodeList 출력
+    else:
+        return chr(recode_char) # 하나면 하나만 출력
+
 
 class all:
     def __init__(self, file_obj):
@@ -31,3 +49,4 @@ class all:
         self.fileSize = get_fileSize(self.byteArr)
         self.freqList = get_freqList(self.byteArr, self.fileSize)
         self.entropy = get_entropy(self.freqList)
+        self.highfreq = get_highest_freq(self.freqList)
