@@ -10,10 +10,15 @@ get_freqList(byteArr, fileSize)
 get_entropy(freqList)
 파일의 엔트로피 반환 (=<8.0)
 
+get_highest_freq(freqList)
+파일에서 가장 많이 노출된 문자 반환
+
 all(file_name)
+
 클래스 형태
   info.byteArr
   info.fileSize
   info.freqList
   info.entropy
+  info.highfreq
   
