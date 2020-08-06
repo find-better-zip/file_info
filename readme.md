@@ -13,6 +13,14 @@ get_entropy(freqList)
 get_highest_freq(freqList)
 파일에서 가장 많이 노출된 문자 반환
 
+get_front_charList(byteArr, highfreq)
+파일에서 가장 많이 노출된 문자의 앞문자와 가장 많이 노출된 문자 반환(순위는 안넣음)
+
+목표 get_front_charList_Rank(byteArr, ArrSet)
+파일에서 가장 많이 노출된 문자의 앞문자와 가장 많이 노출된 문자의 순위 반환
+
+
+
 all(file_name)
 
 클래스 형태
