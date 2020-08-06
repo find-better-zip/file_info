@@ -42,6 +42,28 @@ def get_highest_freq(freqList):
     else:
         return chr(recode_char) # 하나면 하나만 출력
 
+def get_front_charList(byteArr, highfreq):
+    rep = 0
+    ArrSet = []
+    ArrSet_sort = []
+    if len(highfreq) > 1:
+        for high in highfreq:
+            rep = -1
+            for b in byteArr:
+                if b == high and rep >= 0 and byteArr[rep] != '\n' and byteArr[rep] != ' ':
+                    ArrSet.append(byteArr[rep]+b)
+                rep += 1
+    else:
+        rep = -1
+        high = highfreq
+        for b in byteArr:
+            if b == high and rep >= 0 and byteArr[rep] != '\n' and byteArr[rep] != ' ':
+                ArrSet.append([byteArr[rep]+b])
+            rep += 1
+    for v in ArrSet: # 중복 제거
+        if v not in ArrSet_sort:
+            ArrSet_sort.append(v)
+    return ArrSet_sort
 
 class all:
     def __init__(self, file_obj):
