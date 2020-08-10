@@ -24,51 +24,18 @@ def get_entropy(freqList):
             ent += freq * math.log(freq, 0.5) * freq# freqList 리스트에서 -log_1/2(freq) 수행 후 ent 값을 더해줌
     return ent
 
-def get_highest_freq(freqList):
-    rep = 0 # 반복용
-    recode_char = 0 #저장 1 초기화
-    recode_numberSize = 0.0 # 저장 2 초기화
-    recodeList = [0]
-    for freq in freqList: 
-        if recode_numberSize == freq and chr(rep) != ' ' and chr(rep) != '\n': # 겹치는거 있으면
-            recodeList.append(chr(rep)) # 겹치는거 추가함
-        if recode_numberSize < freq and chr(rep) != ' ' and chr(rep) != '\n': # 더 크면
-            recode_char = rep # 설정 변경
-            recode_numberSize = freq 
-            recodeList = [chr(rep)] # 배열 초기화
-        rep += 1
-    if len(recodeList) > 1: # 배열이 하나 이상이면
-        return recodeList # recodeList 출력
-    else:
-        return chr(recode_char) # 하나면 하나만 출력
-
-def get_front_charList(byteArr, highfreq):
-    rep = 0
-    ArrSet = []
-    ArrSet_sort = []
-    if len(highfreq) > 1:
-        for high in highfreq:
-            rep = -1
-            for b in byteArr:
-                if b == high and rep >= 0 and byteArr[rep] != '\n' and byteArr[rep] != ' ':
-                    ArrSet.append(byteArr[rep]+b)
-                rep += 1
-    else:
-        rep = -1
-        high = highfreq
-        for b in byteArr:
-            if b == high and rep >= 0 and byteArr[rep] != '\n' and byteArr[rep] != ' ':
-                ArrSet.append([byteArr[rep]+b])
-            rep += 1
-    for v in ArrSet: # 중복 제거
-        if v not in ArrSet_sort:
-            ArrSet_sort.append(v)
-    return ArrSet_sort
-
 class all:
     def __init__(self, file_obj):
         self.byteArr = get_byteArr(file_obj)
         self.fileSize = get_fileSize(self.byteArr)
         self.freqList = get_freqList(self.byteArr, self.fileSize)
         self.entropy = get_entropy(self.freqList)
-        self.highfreq = get_highest_freq(self.freqList)
+
+if __name__=='__main__':
+    file_name = str(input("file name : "))
+    file = open(file_name,"r")
+    info = all(file)
+    file.close()
+    print("fileSize :", info.fileSize,"(byte)")
+    print("freqList :", info.freqList)
+    print("entropy :", info.entropy)
